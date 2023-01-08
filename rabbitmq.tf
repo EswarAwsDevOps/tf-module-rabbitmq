@@ -13,3 +13,8 @@ labauto ansible
 ansible-pull -i localhost, -U https://github.com/EswarAwsDevOps/roboshop-ansible roboshop.yml -e ROLE_NAME=rabbitmq -e ENV=${var.env}
 EOF
 }
+resource "aws_ec2_tag" "name-tag" {
+  resource_id = aws_spot_instance_request.rabbitmq.spot_instance_id
+  key         = "Name"
+  value       = "${var.env}-rabbitmq"
+}
